@@ -292,7 +292,7 @@ window.onload = () => {
         xhttp.send();
     }
     get_temp();
-    //update_weather();
+    update_weather();
 }
 
     function togglePump() {
