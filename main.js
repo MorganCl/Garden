@@ -5,20 +5,49 @@ window.onload = () => {
     gradient.addColorStop(0, 'rgb(0, 187, 240)');
     gradient.addColorStop(1, 'rgba(246, 246, 246, 1)');
 
-    const labels = ["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"];
+    const labels_temp = ["0:00","0:30",
+                         "1:00","1:30",
+                         "2:00","2:30",
+                         "3:00","3:30",
+                         "4:00","4:30",
+                         "5:00","5:30",
+                         "6:00","6:30",
+                         "7:00","7:30",
+                         "8:00","8:30",
+                         "9:00","9:30",
+                         "10:00","10:30",
+                         "11:00","11:30",
+                         "12:00","12:30",
+                         "13:00","13:30",
+                         "14:00","14:30",
+                         "15:00","15:30",
+                         "16:00","16:30",
+                         "17:00","17:30",
+                         "18:00","18:30",
+                         "19:00","19:30",
+                         "20:00","20:30",
+                         "21:00","21:30",
+                         "22:00","22:30",
+                         "23:00","23:30"
+                        ];
     let d = new Date();
     console.log(d.getHours());
-    let max = 24;
-    for (let i = 0 ; i < labels.length; i++ ) {
-        if (labels[0].substring(0, labels[0].indexOf(":")) == d.getHours()) {
+    let labels = []
+    for (let i = 0 ; i < labels_temp.length; i++ ) {
+        console.log(labels_temp[0].substring(0, labels_temp[0].indexOf(":")),  d.getHours(),  labels_temp[i].substring(labels_temp[i].indexOf(":") + 1, labels_temp[i].length), d.getMinutes())
+        if (labels_temp[i].substring(0, labels_temp[i].indexOf(":")) == d.getHours()) { 
+            labels.push(labels_temp[i]);
+            if (labels_temp[i].substring(labels_temp[i].indexOf(":") + 1, labels_temp[i].length) <= d.getMinutes()) {
+                labels.push(labels_temp[i+1])
+            }
             break;
         } else {
-            labels.push(labels[0]);
-            labels.shift()
+            labels.push(labels_temp[i]);
         }
-        console.log(labels);
     }
+    labels = labels.slice(-12)
     console.log(labels);
+    console.log(labels_temp);
     let dataset = [];
     const data = {
         labels: labels,
@@ -263,7 +292,7 @@ window.onload = () => {
         xhttp.send();
     }
     get_temp();
-    update_weather();
+    //update_weather();
 
     function togglePump() {
         var xhttp = new XMLHttpRequest();
