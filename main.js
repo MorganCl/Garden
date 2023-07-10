@@ -293,6 +293,7 @@ window.onload = () => {
     }
     get_temp();
     //update_weather();
+}
 
     function togglePump() {
         var xhttp = new XMLHttpRequest();
@@ -312,4 +313,3 @@ window.onload = () => {
         xhttp.open("GET", "http://192.168.0.32/heat_mattog", true);
         xhttp.send();
     }
-}
