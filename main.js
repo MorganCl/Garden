@@ -164,7 +164,7 @@ window.onload = () => {
             }
         }
     };
-    xhttp.open("GET", "/heat_mat_status", true);
+    xhttp.open("GET", "/heat_mat", true);
     xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
