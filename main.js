@@ -118,7 +118,7 @@ window.onload = () => {
                 document.getElementById("tempActual").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "http://192.168.0.32/temperaturec", true);
+    xhttp.open("GET", "/temperaturec", true);
     xhttp.send();
     }, 2000) ;
     function get_temp() {
