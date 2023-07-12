@@ -53,7 +53,7 @@ window.onload = () => {
         labels: labels,
         datasets: [
             {
-                label: 'Dataset 1',
+                label: 'Temperature',
                 data: dataset,
                 borderColor: "rgb(92, 156, 230)",
                 
@@ -76,6 +76,13 @@ window.onload = () => {
                         color: "#fff",
                     }
                 },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            return tooltipItem.formattedValue + "°C";
+                        }
+                    }
+                }
             },
             scales: {
                 x:{
@@ -102,8 +109,11 @@ window.onload = () => {
                         lineWidth: context => context.tick.value == 0 ? 2 : 0 //Set only 0 line visible
                     },
                     ticks: {
-                        display: false,
-                    },
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, ticks) {
+                            return (index % 2 == 0) ? value + "°C" : "";
+                        },
+                    }
                 }
             },
         },
@@ -116,10 +126,10 @@ window.onload = () => {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("tempActual").innerHTML = this.responseText;
+            }
         }
-    };
-    xhttp.open("GET", "/temperaturec", true);
-    xhttp.send();
+        xhttp.open("GET", "http://192.168.0.32/temperaturec", true);
+        xhttp.send();
     }, 2000) ;
     function get_temp() {
         var xhttp = new XMLHttpRequest();
@@ -128,13 +138,13 @@ window.onload = () => {
                 ds = this.responseText;
                 dataset = ds.split(",")
                 temp_chart.data.datasets[0].data = dataset
-    //			temp_chart.data.datasets[0].labels = temp_chart
+//    			temp_chart.data.datasets[0].labels = temp_chart
                 temp_chart.update();
-                update_temp();
+                //update_temp();
                 setTimeout(get_temp, 1000 * 60)
             }
     };
-    xhttp.open("GET", "/temperatures", true);
+    xhttp.open("GET", "http://192.168.0.32/temperatures", true);
     xhttp.send();
     };
     setInterval(function ( ) {
@@ -149,7 +159,7 @@ window.onload = () => {
             }
         }
     };
-    xhttp.open("GET", "/pumpc", true);
+    xhttp.open("GET", "http://192.168.0.32/pumpc", true);
     xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -164,7 +174,7 @@ window.onload = () => {
             }
         }
     };
-    xhttp.open("GET", "/heat_mat", true);
+    xhttp.open("GET", "http://192.168.0.32/heat_mat", true);
     xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -174,7 +184,7 @@ window.onload = () => {
             document.getElementById("voltage").innerHTML = this.responseText + "V";
         }
     };
-    xhttp.open("GET", "/voltage", true);
+    xhttp.open("GET", "http://192.168.0.32/voltage", true);
     xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -184,7 +194,7 @@ window.onload = () => {
                 document.getElementById("current").innerHTML = this.responseText + "A";
             }
         };
-        xhttp.open("GET", "/current", true);
+        xhttp.open("GET", "http://192.168.0.32/current", true);
         xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -194,7 +204,7 @@ window.onload = () => {
                 document.getElementById("cost").innerHTML = "£" + this.responseText;
             }
         };
-        xhttp.open("GET", "/cost_per_day", true);
+        xhttp.open("GET", "http://192.168.0.32/cost_per_day", true);
         xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -204,7 +214,7 @@ window.onload = () => {
                 document.getElementById("total_cost").innerHTML = "£" + this.responseText;
             }
         };
-        xhttp.open("GET", "/total_cost", true);
+        xhttp.open("GET", "http://192.168.0.32/total_cost", true);
         xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -214,7 +224,7 @@ window.onload = () => {
             document.getElementById("power").innerHTML = this.responseText + "W";
         }
     };
-    xhttp.open("GET", "/power", true);
+    xhttp.open("GET", "http://192.168.0.32/power", true);
     xhttp.send();
     }, 2000) ;
     setInterval(function ( ) {
@@ -224,7 +234,7 @@ window.onload = () => {
             document.getElementById("pf").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "/pf", true);
+    xhttp.open("GET", "http://192.168.0.32/pf", true);
     xhttp.send();
     }, 2000) ;
     function add(accumulator, a) {
@@ -301,7 +311,7 @@ window.onload = () => {
             if (this.readyState == 4 && this.status == 200) {
             }
         };
-        xhttp.open("GET", "/pumpctog", true);
+        xhttp.open("GET", "http://192.168.0.32/pumpctog", true);
         xhttp.send();
     }
     function toggleHeatMat() {
@@ -310,6 +320,6 @@ window.onload = () => {
             if (this.readyState == 4 && this.status == 200) {
             }
         };
-        xhttp.open("GET", "/heat_mattog", true);
+        xhttp.open("GET", "http://192.168.0.32/heat_mattog", true);
         xhttp.send();
     }
