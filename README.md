@@ -36,6 +36,8 @@ Installation
     Install the necessary libraries using the Library Manager in Arduino IDE.
 
     Configure your WiFi credentials and other settings in the sketch.
+	
+	Add your appid to the openweather API request within main.js
 
     Upload the sketch to your ESP32 or ESP8266.
 
@@ -54,7 +56,6 @@ The web interface provides a user-friendly dashboard with real-time data visuali
     Climate tracking with temperature graphs.
     Relay control for water pumps and heating mats.
     Daily power consumption and cost estimates.
-    ...
 
 Contributing
 
